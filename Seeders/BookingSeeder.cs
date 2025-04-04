@@ -14,10 +14,25 @@ namespace WorkshopBookingSystemWebAPI.Seeders
                 var employees = context.Employees.ToList();
                 var serviceTypes = context.ServiceTypes.ToList();
 
+                if (employees.Count == 0)
+                {
+                    throw new InvalidOperationException("No employees found. Seed employees first.");
+                }
+
+                if (serviceTypes.Count == 0)
+                {
+                    throw new InvalidOperationException("No service types found. Seed service types first.");
+                }
+
+                if (customers.Count == 0)
+                {
+                    throw new InvalidOperationException("No customers found. Seed customers first.");
+                }
+
                 var bookingFaker = new Faker<Booking>()
                     .RuleFor(b => b.CustomerId, f => f.PickRandom(customers).CustomerId)
                     .RuleFor(a => a.EmployeeId, f => f.PickRandom(employees).EmployeeId)
-                    .RuleFor(b => b.ServiceTypeId, f => f.PickRandom(serviceTypes).ServiceTypeId)
+                    .RuleFor(a => a.ServiceTypeId, (f, a) => a.ServiceType.ServiceTypeId)
                     .RuleFor(b => b.StartTime, f => f.Date.Soon())
                     .RuleFor(b => b.EndTime, (f, b) => b.StartTime.AddMinutes(30));
 
