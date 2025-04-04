@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using WorkshopBookingSystemWebAPI.Database;
+using WorkshopBookingSystemWebAPI.Seeders;
 namespace WorkshopBookingSystemWebAPI;
 
 public class Program
@@ -19,8 +20,21 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        builder.Services.AddScoped<EmployeeSeeder>();
+        builder.Services.AddScoped<CustomerSeeder>();
+        builder.Services.AddScoped<BookingSeeder>();
+        builder.Services.AddScoped<ServiceTypeSeeder>();
+        builder.Services.AddScoped<AvailableSlotSeeder>();
+        builder.Services.AddScoped<DatabaseSeeder>();
 
         var app = builder.Build();
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
+            var context = scope.ServiceProvider.GetRequiredService<WorkshopBookingSystemContext>();
+            seeder.Seed(context);
+        }
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

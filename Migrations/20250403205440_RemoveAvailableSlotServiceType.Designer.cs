@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WorkshopBookingSystemWebAPI.Database;
 
@@ -11,9 +12,11 @@ using WorkshopBookingSystemWebAPI.Database;
 namespace WorkshopBookingSystemWebAPI.Migrations
 {
     [DbContext(typeof(WorkshopBookingSystemContext))]
-    partial class WorkshopBookingSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20250403205440_RemoveAvailableSlotServiceType")]
+    partial class RemoveAvailableSlotServiceType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,17 +42,12 @@ namespace WorkshopBookingSystemWebAPI.Migrations
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ServiceTypeId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("AvailableSlotId");
 
                     b.HasIndex("EmployeeId");
-
-                    b.HasIndex("ServiceTypeId");
 
                     b.ToTable("AvailableSlots");
                 });
@@ -162,6 +160,9 @@ namespace WorkshopBookingSystemWebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceTypeId"));
 
+                    b.Property<int?>("AvailableSlotId")
+                        .HasColumnType("int");
+
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("time");
 
@@ -174,6 +175,8 @@ namespace WorkshopBookingSystemWebAPI.Migrations
 
                     b.HasKey("ServiceTypeId");
 
+                    b.HasIndex("AvailableSlotId");
+
                     b.ToTable("ServiceTypes");
                 });
 
@@ -185,15 +188,7 @@ namespace WorkshopBookingSystemWebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WorkshopBookingSystemWebAPI.Models.ServiceType", "ServiceType")
-                        .WithMany()
-                        .HasForeignKey("ServiceTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Employee");
-
-                    b.Navigation("ServiceType");
                 });
 
             modelBuilder.Entity("WorkshopBookingSystemWebAPI.Models.Booking", b =>
@@ -221,6 +216,18 @@ namespace WorkshopBookingSystemWebAPI.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("ServiceType");
+                });
+
+            modelBuilder.Entity("WorkshopBookingSystemWebAPI.Models.ServiceType", b =>
+                {
+                    b.HasOne("WorkshopBookingSystemWebAPI.Models.AvailableSlot", null)
+                        .WithMany("ServiceTypes")
+                        .HasForeignKey("AvailableSlotId");
+                });
+
+            modelBuilder.Entity("WorkshopBookingSystemWebAPI.Models.AvailableSlot", b =>
+                {
+                    b.Navigation("ServiceTypes");
                 });
 #pragma warning restore 612, 618
         }

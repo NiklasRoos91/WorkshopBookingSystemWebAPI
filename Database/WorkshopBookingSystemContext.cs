@@ -11,7 +11,6 @@ namespace WorkshopBookingSystemWebAPI.Database
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<AvailableSlot> AvailableSlots { get; set; }
-        public DbSet<AvailableSlotServiceType> AvailableSlotServiceTypes { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }
 
 
@@ -19,19 +18,11 @@ namespace WorkshopBookingSystemWebAPI.Database
         {
             base.OnModelCreating(modelBuilder);
 
-            // Definiera många-till-många-relationen mellan AvailableSlot och ServiceType
-            modelBuilder.Entity<AvailableSlotServiceType>()
-                .HasKey(ass => new { ass.AvailableSlotId, ass.ServiceTypeId });
-
-            modelBuilder.Entity<AvailableSlotServiceType>()
-                .HasOne(ass => ass.AvailableSlot)
-                .WithMany(slot => slot.AvailableSlotServiceTypes)
-                .HasForeignKey(ass => ass.AvailableSlotId);
-
-            modelBuilder.Entity<AvailableSlotServiceType>()
-                .HasOne(ass => ass.ServiceType)
-                .WithMany()
-                .HasForeignKey(ass => ass.ServiceTypeId);
+            modelBuilder.Entity<AvailableSlot>()
+              .HasOne(a => a.ServiceType)   // Varje AvailableSlot har en ServiceType
+              .WithMany()                   // Ingen referens tillbaka
+              .HasForeignKey(a => a.ServiceTypeId)
+              .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<ServiceType>()
                 .Property(s => s.Price)

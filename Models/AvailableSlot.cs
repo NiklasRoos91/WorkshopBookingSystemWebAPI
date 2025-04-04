@@ -10,6 +10,7 @@
         public DateTime EndTime { get; set; }
         public bool IsAvailable { get; set; }
 
-        public List<AvailableSlotServiceType> AvailableSlotServiceTypes { get; set; }
+        public int ServiceTypeId { get; set; }
+        public ServiceType ServiceType { get; set; }
     }
 }
