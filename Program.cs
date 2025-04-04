@@ -1,7 +1,11 @@
 
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using WorkshopBookingSystemWebAPI.Database;
+using WorkshopBookingSystemWebAPI.Interfaces;
 using WorkshopBookingSystemWebAPI.Seeders;
+using WorkshopBookingSystemWebAPI.Services;
+using WorkshopBookingSystemWebAPI.Validators;
 namespace WorkshopBookingSystemWebAPI;
 
 public class Program
@@ -26,6 +30,11 @@ public class Program
         builder.Services.AddScoped<ServiceTypeSeeder>();
         builder.Services.AddScoped<AvailableSlotSeeder>();
         builder.Services.AddScoped<DatabaseSeeder>();
+        builder.Services.AddScoped<DataValidator>();
+        builder.Services.AddScoped<IDataService, DataService>();
+        builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+
+        builder.Services.AddValidatorsFromAssemblyContaining<AvailableSlotValidator>();
 
         var app = builder.Build();
 
