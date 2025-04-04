@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using System.Drawing.Text;
 using WorkshopBookingSystemWebAPI.Database;
 using WorkshopBookingSystemWebAPI.Models;
 
@@ -8,6 +9,7 @@ namespace WorkshopBookingSystemWebAPI.Seeders
     {
         public void Seed(WorkshopBookingSystemContext context)
         {
+            
             if (!context.AvailableSlots.Any())
             {
                 var employees = context.Employees.ToList();

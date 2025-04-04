@@ -19,10 +19,17 @@ namespace WorkshopBookingSystemWebAPI.Database
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<AvailableSlot>()
-              .HasOne(a => a.ServiceType)   // Varje AvailableSlot har en ServiceType
-              .WithMany()                   // Ingen referens tillbaka
+              .HasOne(a => a.ServiceType)
+              .WithMany()
               .HasForeignKey(a => a.ServiceTypeId)
               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Booking>()
+                .HasOne(b => b.ServiceType)
+                .WithMany()
+                .HasForeignKey(b => b.ServiceTypeId)
+                .OnDelete(DeleteBehavior.Restrict);
+
 
             modelBuilder.Entity<ServiceType>()
                 .Property(s => s.Price)
