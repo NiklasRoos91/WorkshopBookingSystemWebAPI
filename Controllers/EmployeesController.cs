@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using FluentValidation;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WorkshopBookingSystemWebAPI.Database;
 using WorkshopBookingSystemWebAPI.DTOs;
 using WorkshopBookingSystemWebAPI.Interfaces;
 
@@ -16,12 +10,10 @@ namespace WorkshopBookingSystemWebAPI.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly WorkshopBookingSystemContext _context;
         private readonly IEmployeeService _employeeService;
 
-        public EmployeesController(WorkshopBookingSystemContext context, IEmployeeService employeeService)
+        public EmployeesController(IEmployeeService employeeService)
         {
-            _context = context;
             _employeeService = employeeService;
         }
 
@@ -57,7 +49,7 @@ namespace WorkshopBookingSystemWebAPI.Controllers
         // POST: api/Employees
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("Create new Empoyee")]
-        public async Task<ActionResult> CreateEmployee(CreateEmployeeDto employee)
+        public async Task<ActionResult> CreateEmployee(EmployeeInputDto  employee)
         {
             try
             {
@@ -74,7 +66,7 @@ namespace WorkshopBookingSystemWebAPI.Controllers
         // PUT: api/Employees/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("Update Employee with {employeeId}")]
-        public async Task<IActionResult> PutEmployee(int employeeId, CreateEmployeeDto employee)
+        public async Task<IActionResult> UpdateEmployeeInformation(int employeeId, EmployeeInputDto  employee)
         {
             try
             {

@@ -6,8 +6,8 @@ namespace WorkshopBookingSystemWebAPI.Interfaces
     {
         public Task<List<EmployeeDto>> GetAllEmployees();
         public Task<EmployeeDto?> GetEmployeeById(int id);
-        public Task<CreateEmployeeDto> CreateEmployee(CreateEmployeeDto employee);
-        public Task<CreateEmployeeDto> UpdateEmployee(int employeeId, CreateEmployeeDto employee);
+        public Task<EmployeeInputDto > CreateEmployee(EmployeeInputDto  employee);
+        public Task<EmployeeInputDto > UpdateEmployee(int employeeId, EmployeeInputDto  employee);
         public Task<bool> DeleteEmployee(int employeeId);
         public Task<bool> EmployeeExists(int employeeId);
     }
