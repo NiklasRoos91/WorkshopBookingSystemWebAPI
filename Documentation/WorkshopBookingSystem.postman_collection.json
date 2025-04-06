@@ -1,0 +1,323 @@
+{
+	"info": {
+		"_postman_id": "6e8cb37c-3c32-4058-862f-bf95ccbc5b6b",
+		"name": "WorkshopBookingSystem",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "43161758"
+	},
+	"item": [
+		{
+			"name": "CustomerAPI",
+			"item": [
+				{
+					"name": "Get All Customers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7156/api/customers/Get%20all%20Customers"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://localhost:7156/api/customers/Get%20Customer%2012"
+					},
+					"response": []
+				},
+				{
+					"name": "Post Create Customer",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Doe\",\r\n  \"address\": \"Random Street 123\",\r\n  \"phoneNumber\": \"0723009090\",\r\n  \"email\": \"john.doe@random.se\",\r\n  \"vehicleMake\": \"Toyota\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7156/api/customers/Create%20new%20Customer"
+					},
+					"response": []
+				},
+				{
+					"name": "Put Update Customer",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Rex\",\r\n  \"address\": \"New Ave 987\",\r\n  \"phoneNumber\": \"0723033333\",\r\n  \"email\": \"john.rex@live.se\",\r\n  \"vehicleMake\": \"Toyota\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7156/api/Customers/Update%20Customer%2030"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "https://localhost:7156/api/Customers/Delete%20Customer%2021"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customers - Filtered and/or Sorted",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7156/api/Customers/Get%20Customers?filter=Toyota&sort=desc",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7156",
+							"path": [
+								"api",
+								"Customers",
+								"Get%20Customers"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "Toyota"
+								},
+								{
+									"key": "sort",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EmployeeAPI",
+			"item": [
+				{
+					"name": "Get All Employees",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://localhost:7156/api/Employees/Get%20all%20employees"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Employee",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://localhost:7156/api/Employees/Get Employee 12"
+					},
+					"response": []
+				},
+				{
+					"name": "Put Update Employee",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Doe\",\r\n  \"phoneNumber\": \"0723002345\",\r\n  \"email\": \"john.doe@random.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7156/api/Employees/Update%20Employee%20with%2012"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Employee",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "https://localhost:7156/api/Employees/Delete%20employee%20by%2018"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Employee",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"phoneNumber\": \"0723000000\",\r\n    \"email\": \"john.doe@random.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7156/api/Employees/Create%20new%20Employee"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ServiceTypeAPI",
+			"item": [
+				{
+					"name": "Get All ServiceTypes",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://localhost:7156/api/ServiceTypes/Get%20all%20ServiceTypes"
+					},
+					"response": []
+				},
+				{
+					"name": "Get ServiceType",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://localhost:7156/api/ServiceTypes/Get%20ServiceType%20with%2011"
+					},
+					"response": []
+				},
+				{
+					"name": "Create ServiceType",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Roof Change\",\r\n    \"price\": 30.00,\r\n    \"duration\": \"01:20:00.0000000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7156/api/ServiceTypes/Create%20ServiceType"
+					},
+					"response": []
+				},
+				{
+					"name": "Update ServiceType",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Roof Paint\",\r\n    \"price\": 20.00,\r\n    \"duration\": \"03:20:00.0000000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7156/api/ServiceTypes/Update%20ServiceType%20with%2022"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete ServiceType",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Roof Paint\",\r\n    \"price\": 20.00,\r\n    \"duration\": \"03:20:00.0000000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7156/api/ServiceTypes/Delete%20ServiceType%2022"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
