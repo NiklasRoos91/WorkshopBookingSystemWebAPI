@@ -9,5 +9,6 @@ namespace WorkshopBookingSystemWebAPI.Interfaces
         public Task<CustomerInputDto > CreateCustomer(CustomerInputDto  customer);
         public Task<CustomerInputDto > UpdateCustomer(int customerId, CustomerInputDto  customer);
         public Task<bool> DeleteCustomer(int customerId);
+        public Task<List<CustomerDto>> GetCustomersWithFilterAndSort(string? filter, string sort);
     }
 }

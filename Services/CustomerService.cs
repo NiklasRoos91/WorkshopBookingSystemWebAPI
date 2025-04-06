@@ -47,7 +47,7 @@ namespace WorkshopBookingSystemWebAPI.Services
                 })
                 .FirstOrDefaultAsync();
         }
-        public async Task<CustomerInputDto > CreateCustomer(CustomerInputDto  customer)
+        public async Task<CustomerInputDto> CreateCustomer(CustomerInputDto customer)
         {
             var validaitionResult = _customerValidator.Validate(customer);
             if (!validaitionResult.IsValid)
@@ -66,7 +66,7 @@ namespace WorkshopBookingSystemWebAPI.Services
             _context.Customers.Add(newCustomer);
             await _context.SaveChangesAsync();
 
-            return new CustomerInputDto 
+            return new CustomerInputDto
             {
                 FirstName = newCustomer.FirstName,
                 LastName = newCustomer.LastName,
@@ -76,7 +76,7 @@ namespace WorkshopBookingSystemWebAPI.Services
                 VehicleMake = newCustomer.VehicleMake,
             };
         }
-        public async Task<CustomerInputDto > UpdateCustomer(int customerId, CustomerInputDto  customer)
+        public async Task<CustomerInputDto> UpdateCustomer(int customerId, CustomerInputDto customer)
         {
             var validationResult = _customerValidator.Validate(customer);
 
@@ -99,7 +99,7 @@ namespace WorkshopBookingSystemWebAPI.Services
 
             await _context.SaveChangesAsync();
 
-            return new CustomerInputDto 
+            return new CustomerInputDto
             {
                 FirstName = customerToUpdate.FirstName,
                 LastName = customerToUpdate.LastName,
@@ -123,5 +123,36 @@ namespace WorkshopBookingSystemWebAPI.Services
 
             return true;
         }
+
+        public async Task<List<CustomerDto>> GetCustomersWithFilterAndSort(string? filter, string sort)
+        {
+            var query = _context.Customers.AsQueryable();
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                query = query.Where(c => c.FirstName.Contains(filter) || c.LastName.Contains(filter) || c.VehicleMake.Contains(filter));
+            }
+
+            if (sort == "desc")
+            {
+                query = query.OrderByDescending(c => c.LastName);
+            }
+            else
+            {
+                query = query.OrderBy(c => c.LastName);
+            }
+
+            return await query.Select(c => new CustomerDto
+            {
+                CustomerId = c.CustomerId,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Email = c.Email,
+                PhoneNumber = c.PhoneNumber,
+                Address = c.Address,
+                VehicleMake = c.VehicleMake,
+            })
+            .ToListAsync();
+    }
     }
 }

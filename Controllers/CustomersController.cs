@@ -33,7 +33,7 @@ namespace WorkshopBookingSystemWebAPI.Controllers
         }
 
         // GET: api/Customers/5
-        [HttpGet("Get Employee by{customerId}")]
+        [HttpGet("Get Customer {customerId}")]
         public async Task<ActionResult<CustomerDto>> GetCustomer(int customerId)
         {
             var customerDto = await _customerService.GetCustomersById(customerId);
@@ -47,12 +47,12 @@ namespace WorkshopBookingSystemWebAPI.Controllers
         // POST: api/Customers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("Create new Customer")]
-        public async Task<ActionResult> CreateCustomer(CustomerInputDto  customer)
+        public async Task<ActionResult> CreateCustomer(CustomerInputDto customer)
         {
-            try 
+            try
             {
-            var createdCustomer = await _customerService.CreateCustomer(customer);
-            return Ok(createdCustomer);
+                var createdCustomer = await _customerService.CreateCustomer(customer);
+                return Ok(createdCustomer);
             }
             catch (ValidationException ex)
             {
@@ -63,10 +63,10 @@ namespace WorkshopBookingSystemWebAPI.Controllers
 
         // PUT: api/Customers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("Update Employee information with {customerId}")]
-        public async Task<IActionResult> UpdateCustomerInformation(int customerId, CustomerInputDto  customer)
+        [HttpPut("Update Employee {customerId}")]
+        public async Task<IActionResult> UpdateCustomerInformation(int customerId, CustomerInputDto customer)
         {
-           try
+            try
             {
                 var updatedCustomer = await _customerService.UpdateCustomer(customerId, customer);
                 if (updatedCustomer == null)
@@ -84,7 +84,7 @@ namespace WorkshopBookingSystemWebAPI.Controllers
         }
 
         // DELETE: api/Customers/5
-        [HttpDelete("Delete Customer with {customerId}")]
+        [HttpDelete("Delete Customer {customerId}")]
         public async Task<IActionResult> DeleteCustomer(int customerId)
         {
             var deletedCustomer = await _customerService.DeleteCustomer(customerId);
@@ -95,6 +95,21 @@ namespace WorkshopBookingSystemWebAPI.Controllers
             }
 
             return NoContent();
+        }
+
+        // GET: api/Customers
+        [HttpGet("Get Customers")]
+        public async Task<ActionResult<IEnumerable<CustomerDto>>> GetCustomers(
+            [FromQuery] string? filter = null,
+            [FromQuery] string sort = "asc")
+        {
+            var customers = await _customerService.GetCustomersWithFilterAndSort(filter, sort);
+            if (customers == null || !customers.Any())
+            {
+                return NotFound("No customers found.");
+            }
+
+            return Ok(customers);
         }
     }
 }
