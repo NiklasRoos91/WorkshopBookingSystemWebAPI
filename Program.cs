@@ -35,6 +35,7 @@ public class Program
         builder.Services.AddScoped<IDataService, DataService>();
         builder.Services.AddScoped<IEmployeeService, EmployeeService>();
         builder.Services.AddScoped<ICustomerService, CustomerService>();
+        builder.Services.AddScoped<IServiceTypeService, ServiceTypeService>();
 
         builder.Services.AddValidatorsFromAssemblyContaining<AvailableSlotValidator>();
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WorkshopBookingSystemWebAPI.DTOs;
 using WorkshopBookingSystemWebAPI.Interfaces;
+using WorkshopBookingSystemWebAPI.Models;
 
 namespace WorkshopBookingSystemWebAPI.Controllers
 {
@@ -25,7 +26,7 @@ namespace WorkshopBookingSystemWebAPI.Controllers
 
             if (customers == null)
             {
-                return NotFound(new { Message = "No customers where found." });
+                return NotFound("No customers where found.");
             }
 
             return Ok(customers);
@@ -38,7 +39,7 @@ namespace WorkshopBookingSystemWebAPI.Controllers
             var customerDto = await _customerService.GetCustomersById(customerId);
             if (customerDto == null)
             {
-                return NotFound(new { Message = "No customer found with the provided ID." });
+                return NotFound($"No customer found with ID {customerId}");
             }
             return Ok(customerDto);
         }
@@ -68,6 +69,11 @@ namespace WorkshopBookingSystemWebAPI.Controllers
            try
             {
                 var updatedCustomer = await _customerService.UpdateCustomer(customerId, customer);
+                if (updatedCustomer == null)
+                {
+                    return NotFound($"No customer found with ID {customerId}");
+
+                }
                 return Ok(updatedCustomer);
             }
             catch (ValidationException ex)
