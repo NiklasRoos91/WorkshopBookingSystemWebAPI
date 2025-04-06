@@ -63,7 +63,7 @@ namespace WorkshopBookingSystemWebAPI.Controllers
 
         // PUT: api/Customers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("Update Employee {customerId}")]
+        [HttpPut("Update Customer {customerId}")]
         public async Task<IActionResult> UpdateCustomerInformation(int customerId, CustomerInputDto customer)
         {
             try

@@ -84,7 +84,7 @@ namespace WorkshopBookingSystemWebAPI.Services
                 throw new ValidationException(validationResult.Errors);
             }
 
-            var employeeToUpdate = _context.Employees.Find(employeeId);
+            var employeeToUpdate = await _context.Employees.FindAsync(employeeId);
 
             if (employeeToUpdate == null)
             {
