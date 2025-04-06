@@ -84,7 +84,7 @@ namespace WorkshopBookingSystemWebAPI.Controllers
         }
 
         // DELETE: api/ServiceTypes/5
-        [HttpDelete("Delete ServiceType with{serviceTypeId}")]
+        [HttpDelete("Delete ServiceType{serviceTypeId}")]
         public async Task<IActionResult> DeleteServiceType(int serviceTypeId)
         {
             var serviceType = await _serviceTypeService.DeleteServiceType(serviceTypeId);

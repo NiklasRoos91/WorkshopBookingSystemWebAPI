@@ -33,7 +33,7 @@ namespace WorkshopBookingSystemWebAPI.Controllers
         }
 
         // GET: api/Employees/5
-        [HttpGet("Get Employee by {employeeId}")]
+        [HttpGet("Get Employee {employeeId}")]
         public async Task<ActionResult<EmployeeDto>> GetEmployee(int employeeId)
         {
             var employeeDto = await _employeeService.GetEmployeeById(employeeId);
@@ -48,7 +48,7 @@ namespace WorkshopBookingSystemWebAPI.Controllers
 
         // POST: api/Employees
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("Create new Empoyee")]
+        [HttpPost("Create new Employee")]
         public async Task<ActionResult> CreateEmployee(EmployeeInputDto  employee)
         {
             try

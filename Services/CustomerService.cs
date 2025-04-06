@@ -96,6 +96,8 @@ namespace WorkshopBookingSystemWebAPI.Services
             customerToUpdate.LastName = customer.LastName;
             customerToUpdate.Email = customer.Email;
             customerToUpdate.PhoneNumber = customer.PhoneNumber;
+            customerToUpdate.Address = customer.Address;
+            customerToUpdate.VehicleMake = customer.VehicleMake;
 
             await _context.SaveChangesAsync();
 
@@ -153,6 +155,6 @@ namespace WorkshopBookingSystemWebAPI.Services
                 VehicleMake = c.VehicleMake,
             })
             .ToListAsync();
-    }
+        }
     }
 }
