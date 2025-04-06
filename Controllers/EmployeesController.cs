@@ -25,7 +25,7 @@ namespace WorkshopBookingSystemWebAPI.Controllers
 
             if (employees == null)
             {
-                return NotFound(new { Message = "No employees where found." });
+                return NotFound("No employees where found.");
 
             }
 
@@ -40,7 +40,7 @@ namespace WorkshopBookingSystemWebAPI.Controllers
 
             if (employeeDto == null)
             {
-                return NotFound(new { Message = "No employee found with the provided ID." });
+                return NotFound($"No employee found with ID {employeeId}.");
             }
 
             return Ok(employeeDto);

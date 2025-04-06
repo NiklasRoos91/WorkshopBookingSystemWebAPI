@@ -3,7 +3,7 @@ using WorkshopBookingSystemWebAPI.DTOs;
 
 namespace WorkshopBookingSystemWebAPI.Validators
 {
-    public class ServiceTypeValidator :AbstractValidator<CreateServiceTypeDto>
+    public class ServiceTypeValidator :AbstractValidator<ServiceTypeInputDto>
     {
         public ServiceTypeValidator()
         {
@@ -23,8 +23,8 @@ namespace WorkshopBookingSystemWebAPI.Validators
             RuleFor(s => s.Duration)
                 .NotEmpty()
                 .WithMessage("Service type duration is required.")
-                .GreaterThanOrEqualTo(TimeSpan.Zero)
-                .WithMessage("Duration cannot be negative. Please enter a valid duration.");
+                .Must(d => TimeSpan.TryParse(d, out _))
+                .WithMessage("Duration must be a valid format (HH:mm:ss).");
         }
     }
 }
