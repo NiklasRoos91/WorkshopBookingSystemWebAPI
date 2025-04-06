@@ -4,7 +4,7 @@ using WorkshopBookingSystemWebAPI.Models;
 
 namespace WorkshopBookingSystemWebAPI.Validators
 {
-    public class BookingValidator : AbstractValidator<CreateBookingDto>
+    public class BookingValidator : AbstractValidator<BookingInputDto>
     {
         private readonly DataValidator _dataValidator;
 

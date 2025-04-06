@@ -2,7 +2,7 @@
 
 namespace WorkshopBookingSystemWebAPI.DTOs
 {
-    public class CreateAvailableSlotDto
+    public class AvailableSlotInputDto
     {
         public int EmployeeId { get; set; }
         public DateTime StartTime { get; set; }

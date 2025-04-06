@@ -3,7 +3,7 @@ using WorkshopBookingSystemWebAPI.DTOs;
 
 namespace WorkshopBookingSystemWebAPI.Validators
 {
-    public class AvailableSlotValidator : AbstractValidator<CreateAvailableSlotDto>
+    public class AvailableSlotValidator : AbstractValidator<AvailableSlotInputDto>
     {
         private readonly DataValidator _dataValidator;
 

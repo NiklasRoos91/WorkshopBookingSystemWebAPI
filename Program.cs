@@ -1,5 +1,6 @@
 
 using FluentValidation;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WorkshopBookingSystemWebAPI.Database;
 using WorkshopBookingSystemWebAPI.Interfaces;
@@ -33,6 +34,7 @@ public class Program
         builder.Services.AddScoped<DataValidator>();
         builder.Services.AddScoped<IDataService, DataService>();
         builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+        builder.Services.AddScoped<ICustomerService, CustomerService>();
 
         builder.Services.AddValidatorsFromAssemblyContaining<AvailableSlotValidator>();
 

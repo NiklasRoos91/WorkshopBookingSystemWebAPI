@@ -47,7 +47,7 @@ namespace WorkshopBookingSystemWebAPI.Services
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<CreateEmployeeDto> CreateEmployee(CreateEmployeeDto employee)
+        public async Task<EmployeeInputDto > CreateEmployee(EmployeeInputDto  employee)
         {
             var validationResult = _employeeValidator.Validate(employee);
 
@@ -67,7 +67,7 @@ namespace WorkshopBookingSystemWebAPI.Services
             _context.Employees.Add(newEmployee);
             await _context.SaveChangesAsync();
 
-            return new CreateEmployeeDto
+            return new EmployeeInputDto 
             {
                 FirstName = newEmployee.FirstName,
                 LastName = newEmployee.LastName,
@@ -76,7 +76,7 @@ namespace WorkshopBookingSystemWebAPI.Services
             };
         }
 
-        public async Task<CreateEmployeeDto> UpdateEmployee(int employeeId, CreateEmployeeDto employee)
+        public async Task<EmployeeInputDto > UpdateEmployee(int employeeId, EmployeeInputDto  employee)
         {
             var validationResult = _employeeValidator.Validate(employee);
             if (!validationResult.IsValid)
@@ -98,7 +98,7 @@ namespace WorkshopBookingSystemWebAPI.Services
 
             await _context.SaveChangesAsync();
 
-            return new CreateEmployeeDto
+            return new EmployeeInputDto 
             {
                 FirstName = employeeToUpdate.FirstName,
                 LastName = employeeToUpdate.LastName,

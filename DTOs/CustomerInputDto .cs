@@ -1,6 +1,6 @@
 ﻿namespace WorkshopBookingSystemWebAPI.DTOs
 {
-    public class CreateCustomerDto
+    public class CustomerInputDto 
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

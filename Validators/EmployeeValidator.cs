@@ -3,7 +3,7 @@ using WorkshopBookingSystemWebAPI.DTOs;
 
 namespace WorkshopBookingSystemWebAPI.Validators
 {
-    public class EmployeeValidator : AbstractValidator<CreateEmployeeDto>
+    public class EmployeeValidator : AbstractValidator<EmployeeInputDto >
     {
         public EmployeeValidator()
         {
