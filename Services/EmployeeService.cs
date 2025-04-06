@@ -121,10 +121,5 @@ namespace WorkshopBookingSystemWebAPI.Services
 
             return true;
         }
-
-        public Task<bool> EmployeeExists(int employeeId)
-        {
-            throw new NotImplementedException("Denna metod är inte klar ännu.");
-        }
     }
 }
