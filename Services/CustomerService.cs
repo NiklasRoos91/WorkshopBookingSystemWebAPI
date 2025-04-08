@@ -49,7 +49,7 @@ namespace WorkshopBookingSystemWebAPI.Services
         }
         public async Task<CustomerInputDto> CreateCustomer(CustomerInputDto customer)
         {
-            var validaitionResult = _customerValidator.Validate(customer);
+            var validaitionResult = await _customerValidator.ValidateAsync(customer);
             if (!validaitionResult.IsValid)
             {
                 throw new ValidationException(validaitionResult.Errors);
@@ -78,7 +78,7 @@ namespace WorkshopBookingSystemWebAPI.Services
         }
         public async Task<CustomerInputDto> UpdateCustomer(int customerId, CustomerInputDto customer)
         {
-            var validationResult = _customerValidator.Validate(customer);
+            var validationResult = await _customerValidator.ValidateAsync(customer);
 
             if (!validationResult.IsValid)
             {

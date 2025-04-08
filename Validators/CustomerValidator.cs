@@ -1,12 +1,17 @@
 ﻿using FluentValidation;
 using WorkshopBookingSystemWebAPI.DTOs;
+using WorkshopBookingSystemWebAPI.Interfaces;
 
 namespace WorkshopBookingSystemWebAPI.Validators
 {
     public class CustomerValidator : AbstractValidator<CustomerInputDto >
     {
-        public CustomerValidator()
+        private readonly IVehicleApiService _vehicleApiService;
+
+        public CustomerValidator(IVehicleApiService vehicleApiService)
         {
+            _vehicleApiService = vehicleApiService;
+
             RuleFor(x => x.FirstName)
                 .NotEmpty()
                 .WithMessage("First name is required.")
@@ -40,8 +45,9 @@ namespace WorkshopBookingSystemWebAPI.Validators
             RuleFor(x => x.VehicleMake)
                 .NotEmpty()
                 .WithMessage("Vehicle make is required.")
-                .Length(2, 50)
-                .WithMessage("Vehicle make must be between 2 and 50 characters.");
+                .MustAsync(async (vehicleMake, cancellationToken) =>
+                    await _vehicleApiService.DoesVehicleMakeExistAsync(vehicleMake, cancellationToken))
+                .WithMessage("The vehicle make is not valid.");
         }
     }
 }

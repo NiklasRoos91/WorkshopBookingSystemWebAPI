@@ -1,12 +1,11 @@
-
 using FluentValidation;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WorkshopBookingSystemWebAPI.Database;
-using WorkshopBookingSystemWebAPI.Interfaces;
+using WorkshopBookingSystemWebAPI.Extensions;
 using WorkshopBookingSystemWebAPI.Seeders;
-using WorkshopBookingSystemWebAPI.Services;
 using WorkshopBookingSystemWebAPI.Validators;
+
 namespace WorkshopBookingSystemWebAPI;
 
 public class Program
@@ -25,17 +24,10 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-        builder.Services.AddScoped<EmployeeSeeder>();
-        builder.Services.AddScoped<CustomerSeeder>();
-        builder.Services.AddScoped<BookingSeeder>();
-        builder.Services.AddScoped<ServiceTypeSeeder>();
-        builder.Services.AddScoped<AvailableSlotSeeder>();
-        builder.Services.AddScoped<DatabaseSeeder>();
+        builder.Services.AddSeeders();
+        builder.Services.AddApplicationServices();
         builder.Services.AddScoped<DataValidator>();
-        builder.Services.AddScoped<IDataService, DataService>();
-        builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-        builder.Services.AddScoped<ICustomerService, CustomerService>();
-        builder.Services.AddScoped<IServiceTypeService, ServiceTypeService>();
+
 
         builder.Services.AddValidatorsFromAssemblyContaining<AvailableSlotValidator>();
 
