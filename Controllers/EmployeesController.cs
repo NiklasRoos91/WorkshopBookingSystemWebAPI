@@ -47,7 +47,6 @@ namespace WorkshopBookingSystemWebAPI.Controllers
         }
 
         // POST: api/Employees
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("Create new Employee")]
         public async Task<ActionResult> CreateEmployee(EmployeeInputDto  employee)
         {
